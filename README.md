@@ -1,0 +1,2 @@
+# special_beam_vibration
+梁の中央に質点がついたスペシャルなやつ
