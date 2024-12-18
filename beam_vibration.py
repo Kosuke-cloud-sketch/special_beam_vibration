@@ -78,8 +78,8 @@ def main():
         return np.concatenate([dw_dt, dw_tt])
 
     # 時間設定
-    t_span = (0, 0.001)               # 時間範囲
-    t_eval = np.linspace(*t_span, 100)  # 評価時刻の配列
+    t_span = (0, 0.005)               # 時間範囲を長くする（例: 0.005秒まで）
+    t_eval = np.linspace(*t_span, 500)  # 評価時刻の配列を増やす
 
     # プロットとアニメーションのセットアップ
     fig, ax = plt.subplots(figsize=(10, 6))
@@ -116,7 +116,7 @@ def main():
         # 微分方程式の数値解法
         sol = solve_ivp(beam_vibration, t_span, y0, t_eval=t_eval, args=(m,), method='RK45')
 
-        ani = FuncAnimation(fig, animate, frames=len(t_eval), fargs=(sol, m), interval=50, blit=True)
+        ani = FuncAnimation(fig, animate, frames=len(t_eval), fargs=(sol, m), interval=20, blit=True)
 
         if save_option == 'y':
             filename = f'beam_animation_mass_{m}.mp4'
@@ -127,7 +127,7 @@ def main():
                     print(f"{filename} の保存をスキップしました。")
                     continue
             # アニメーションの保存
-            ani.save(filename, fps=60, dpi=300, extra_args=['-vcodec', 'libx264'])
+            ani.save(filename, fps=50, dpi=300, extra_args=['-vcodec', 'libx264'])
             print(f"アニメーションを {filename} として保存しました。")
 
     print("すべての計算が終了しました！")
