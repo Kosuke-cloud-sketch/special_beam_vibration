@@ -61,12 +61,10 @@ def main():
     # 初期条件の定義：三角形状の変位分布
     def initial_conditions():
         w0 = np.zeros(N)
-        midpoint = L / 2
-        for i in range(N):
-            if x[i] <= midpoint:
-                w0[i] = -1 * x[i] / midpoint
-            else:
-                w0[i] = -1 * (L - x[i]) / midpoint
+        # 左側の線形領域
+        w0[:load_position+1] = np.linspace(0, 1, load_position+1)
+        # 右側の線形領域
+        w0[load_position:] = np.linspace(1, 0, N - load_position)
         w1 = np.zeros(N)  # 初期速度（静止）
         return np.concatenate([w0, w1])
 
