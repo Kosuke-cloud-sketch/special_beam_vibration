@@ -68,7 +68,7 @@ def main():
         w1 = np.zeros(N)  # 初期速度（静止）
         return np.concatenate([w0, w1])
 
-    # ビームの運動方程式の定義
+    # ビームの運動方程式の定義（修正済み）
     def beam_vibration(t, y, m):
         w = y[:N]      # 変位
         w_t = y[N:]    # 速度
