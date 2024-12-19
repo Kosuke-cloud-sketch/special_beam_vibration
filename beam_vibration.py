@@ -73,7 +73,7 @@ def main():
         w = y[:N]      # 変位
         w_t = y[N:]    # 速度
         dw_dt = w_t    # 変位の時間微分は速度
-        dw_tt = -D4 @ w - m * delta * w_t[load_position]  # 運動方程式
+        dw_tt = -D4 @ w / (1 + m * delta)   # 運動方程式
         dw_tt[0] = dw_tt[-1] = 0  # 境界条件の適用
         return np.concatenate([dw_dt, dw_tt])
 
